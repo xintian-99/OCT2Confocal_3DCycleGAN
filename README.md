@@ -3,6 +3,9 @@ OCT2Confocal
 Introduction
 OCT2Confocal is an advanced project that leverages a 3D Cycle Generative Adversarial Network (CycleGAN) model for transforming Optical Coherence Tomography (OCT) images into Confocal microscopy styled images. This transformation aims to enhance retinal visualization, aiding in better diagnosis and research in ophthalmology.
 
+![OCT2Confocal Example](A2Rdata2.png)
+
+
 Features
 3D CycleGAN Model: Utilizes a novel 3D CycleGAN architecture for accurate and detailed image translation.
 Retinal Image Enhancement: Specifically designed to enhance retinal imaging for medical diagnostics.
