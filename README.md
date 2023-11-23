@@ -3,6 +3,9 @@
 ## Overview
 The OCT2Confocal dataset uniquely combines in-vivo grayscale Optical Coherence Tomography (OCT) images with ex-vivo colored confocal images from C57BL/6 mice. This dataset includes three sets of retinal images: A2L, A2R, and B3R, representing individual mice and their respective eyes.
 
+![OCT and Confocal Images](images/OCTandconfocal.png)
+
+
 ## Image Acquisition and Processing
 
 ### In-vivo OCT Images
