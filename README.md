@@ -22,8 +22,7 @@ The OCT2Confocal dataset uniquely combines in-vivo grayscale Optical Coherence T
   - **White (Iba1)**: Stains microglia and macrophages.
 - **RGB Images**: Combinations of red, green, and blue channels for model training.
 
-### Test Dataset
-- **Acquisition and Purpose**: This dataset contains 22 OCT images acquired in the same manner as the primary dataset, but without corresponding confocal matches. These images are crucial for evaluating model performance and can be further used to advance multimodal image analysis.
+There are 22 OCT images acquired in the same manner as the primary dataset, but without corresponding confocal matches. These images are for evaluating model performance and can be further used to advance multimodal image analysis.
 
 ## Dataset Applications
 The OCT2Confocal dataset can be applied to:
@@ -38,7 +37,7 @@ The full dataset will be released upon the publication of our paper. This releas
 ### Registration Form
 To request early access, please fill in this [registration form](#). The download link will be shared post submission.
 
-## Citation
+<!-- ## Citation
 If you use the OCT2Confocal dataset in your research, please cite the following paper:
 
 @article{tian2023oct2confocal,
@@ -49,4 +48,4 @@ year={2023}
 }
 
 
-For more information, refer to our publication or contact the dataset curator.
+For more information, refer to our publication or contact the dataset curator. -->
