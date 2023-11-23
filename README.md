@@ -35,7 +35,10 @@ The OCT2Confocal dataset can be applied to:
 The full dataset will be released upon the publication of our paper. This release will allow researchers and practitioners full access to the dataset for their studies and applications.
 
 ### Registration Form
-To request early access, please fill in this [registration form](#). The download link will be shared post submission.
+To request early access, please email xin.tian@bristol.ac.uk. The download link will be shared post-submission.
+
+<!--### Registration Form
+To request early access, please fill in this [registration form](#). The download link will be shared post submission.-->
 
 <!-- ## Citation
 If you use the OCT2Confocal dataset in your research, please cite the following paper:
