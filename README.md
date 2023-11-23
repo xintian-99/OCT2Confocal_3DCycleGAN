@@ -5,7 +5,6 @@ The OCT2Confocal dataset uniquely combines in-vivo grayscale Optical Coherence T
 
 ![OCT and Confocal Images](images/OCTandconfocal.png)
 
-
 ## Image Acquisition and Processing
 
 ### In-vivo OCT Images
@@ -23,16 +22,17 @@ The OCT2Confocal dataset uniquely combines in-vivo grayscale Optical Coherence T
   - **White (Iba1)**: Stains microglia and macrophages.
 - **RGB Images**: Combinations of red, green, and blue channels for model training.
 
-## Dataset Application
-The dataset aims to enhance retinal analysis and improve diagnostic accuracy in ophthalmology, particularly in autoimmune uveitis studies.
-
 ### Test Dataset
-Contains 22 OCT images without confocal matches for model evaluation.
+- **Acquisition and Purpose**: This dataset contains 22 OCT images acquired in the same manner as the primary dataset, but without corresponding confocal matches. These images are crucial for evaluating model performance and can be further used to advance multimodal image analysis.
 
-## Downloading the Dataset
-The database will be available upon the publication of our paper. Access requires registration.
+## Dataset Applications
+The OCT2Confocal dataset is instrumental in enhancing retinal analysis and improving diagnostic accuracy in ophthalmology, with significant potential in medical image processing for multimodal image translation, image registration, and model training.
+
+## Dataset Availability
+The full dataset will be released upon the publication of our paper. This release will allow researchers and practitioners full access to the dataset for their studies and applications.
 
 ### Registration Form
-To request access, please fill in this [registration form](#). The download link will be shared post submission.
+To request early access, please fill in this [registration form](#). The download link will be shared post submission.
 
-For more information, refer to our publication or contact the dataset curator.
+## Citation
+If you use the OCT2Confocal dataset in your research, please cite the following paper:
