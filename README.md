@@ -23,6 +23,7 @@ Ensure the images are pre-processed as per the specifications outlined in the pa
 Install the necessary dependencies with the following command:
 
 ```bash
+conda create --name 3dcyclegan python=3.10.4
 pip install torch==2.0.1+cu117 torchvision==0.15.2+cu117 torchaudio==2.0.2+cu117 -f https://download.pytorch.org/whl/torch_stable.html
 ```
 
