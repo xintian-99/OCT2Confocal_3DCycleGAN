@@ -288,6 +288,54 @@ class GANLoss(nn.Module):
                 loss = prediction.mean()
         return loss
 
+def cal_gradient_loss_3d(real_data, fake_data, device):
+    """
+    Computes the gradient loss between real 3D data and fake 3D data.
+    
+    Arguments:
+    - real_data (tensor): The target/real volumetric image (3D).
+    - fake_data (tensor): The input/generated volumetric image (3D).
+    - device (str): The device on which tensors are located.
+    
+    Returns:
+    - loss (tensor): The gradient loss between real 3D data and fake 3D data.
+    """
+    
+    # Number of channels, e.g., 1 for grayscale volumetric images
+    channels = real_data.size(1)
+    
+    # Define 3D gradient filters for x, y, and z directions
+    # These filters are designed to approximate gradients by considering the central difference in each direction
+    filter_x = torch.Tensor([[[1, 0, -1], [2, 0, -2], [1, 0, -1]],
+                             [[2, 0, -2], [4, 0, -4], [2, 0, -2]],
+                             [[1, 0, -1], [2, 0, -2], [1, 0, -1]]]).repeat(channels, 1, 1, 1, 1).to(device=device)
+
+    filter_y = torch.Tensor([[[1, 2, 1], [0, 0, 0], [-1, -2, -1]],
+                             [[2, 4, 2], [0, 0, 0], [-2, -4, -2]],
+                             [[1, 2, 1], [0, 0, 0], [-1, -2, -1]]]).repeat(channels, 1, 1, 1, 1).to(device=device)
+
+    filter_z = torch.Tensor([[[1, 2, 1], [2, 4, 2], [1, 2, 1]],
+                             [[0, 0, 0], [0, 0, 0], [0, 0, 0]],
+                             [[-1, -2, -1], [-2, -4, -2], [-1, -2, -1]]]).repeat(channels, 1, 1, 1, 1).to(device=device)
+
+    # Ensure filters have the correct dimensions for 3D convolution: (out_channels, in_channels/groups, D, H, W)
+    filter_x = filter_x.unsqueeze(1) # Adding in_channels dimension
+    filter_y = filter_y.unsqueeze(1)
+    filter_z = filter_z.unsqueeze(1)
+
+    # Calculate the gradients for the x, y, and z direction for input and target images using 3D convolution
+    grad_x_fake = F.conv3d(fake_data, filter_x, padding=1, groups=channels)
+    grad_y_fake = F.conv3d(fake_data, filter_y, padding=1, groups=channels)
+    grad_z_fake = F.conv3d(fake_data, filter_z, padding=1, groups=channels)
+
+    grad_x_real = F.conv3d(real_data, filter_x, padding=1, groups=channels)
+    grad_y_real = F.conv3d(real_data, filter_y, padding=1, groups=channels)
+    grad_z_real = F.conv3d(real_data, filter_z, padding=1, groups=channels)
+
+    # Calculate the L1 difference between the gradients in all directions
+    loss = F.l1_loss(grad_x_fake, grad_x_real) + F.l1_loss(grad_y_fake, grad_y_real) + F.l1_loss(grad_z_fake, grad_z_real)
+    
+    return loss
 
 def cal_gradient_penalty(netD, real_data, fake_data, device, type='mixed', constant=1.0, lambda_gp=10.0):
     """Calculate the gradient penalty loss, used in WGAN-GP paper https://arxiv.org/abs/1704.00028
@@ -353,12 +401,12 @@ class ResnetGenerator(nn.Module):
         else:
             use_bias = norm_layer == nn.InstanceNorm3d
 
-        model = [nn.ReflectionPad3d((3,3,3,3,4,4)),
-                 nn.Conv3d(input_nc, ngf, kernel_size=(9,7,7), padding=0, bias=use_bias),
+        model = [nn.ReflectionPad3d(3),
+                 nn.Conv3d(input_nc, ngf, kernel_size=(7,7,7), padding=0, bias=use_bias),
                 norm_layer(ngf),
                 nn.ReLU(True)]
 
-        n_downsampling = 3
+        n_downsampling = 2
         for i in range(n_downsampling):  # add downsampling layers
             mult = 2 ** i
             model += [nn.Conv3d(ngf * mult, ngf * mult * 2, kernel_size=(3,3,3), stride=(2,2,2), padding=1, bias=use_bias),
@@ -378,8 +426,9 @@ class ResnetGenerator(nn.Module):
                                          bias=use_bias),
                       norm_layer(int(ngf * mult / 2)),
                       nn.ReLU(True)]
-            model += [nn.ReflectionPad3d((1,1,1,1,1,1))]
-        model += [nn.Conv3d(int(ngf * mult / 2), output_nc, kernel_size=(8,7,7), padding=0)]
+            model += [nn.ReflectionPad3d(3)]
+        # model += [nn.Conv3d(int(ngf * mult / 2), output_nc, kernel_size=(7,7,7), padding=0)]
+	model += [nn.Conv3d(ngf, output_nc, kernel_size=(7,7,7), padding=0)]
         model += [nn.Tanh()]
 
 
@@ -424,27 +473,27 @@ class ResnetBlock(nn.Module):
         conv_block = []
         p = 0
         if padding_type == 'reflect':
-            conv_block += [nn.ReflectionPad3d((3,3,3,3,1,1))]
+            conv_block += [nn.ReflectionPad3d(1)]
             # conv_block += [nn.ReflectionPad3d((0,0,1,1,1,1))]  # only pad height and width dimensions
         elif padding_type == 'replicate':
-            conv_block += [nn.ReplicationPad3d((3,3,3,3,1,1))]
+            conv_block += [nn.ReplicationPad3d(1)]
             # conv_block += [nn.ReflectionPad3d((0,0,1,1,1,1))]  # only pad height and width dimensions
         elif padding_type == 'zero':
             p = 1
         else:
             raise NotImplementedError('padding [%s] is not implemented' % padding_type)
 
-        conv_block += [nn.Conv3d(dim, dim, kernel_size=(2,5,5), padding=p, bias=use_bias), norm_layer(dim), nn.ReLU(True)]
+        conv_block += [nn.Conv3d(dim, dim, kernel_size=(3,3,3), padding=p, bias=use_bias), norm_layer(dim), nn.ReLU(True)]
         if use_dropout:
             conv_block += [nn.Dropout(0.5)]
 
         p = 0
         if padding_type == 'reflect':
-            conv_block += [nn.ReflectionPad3d((0,0,0,0,1,0))]
-            # conv_block += [nn.ReflectionPad3d((0,0,1,1,1,1))]  # only pad height and width dimensions
+            conv_block += [nn.ReflectionPad3d(1)]
+            # conv_block += [nn.ReflectionPad3d(1)]  # only pad height and width dimensions
         elif padding_type == 'replicate':
-            conv_block += [nn.ReplicationPad3d((0,0,0,0,1,0))]
-            # conv_block += [nn.ReflectionPad3d((0,0,1,1,1,1))]  # only pad height and width dimensions
+            conv_block += [nn.ReplicationPad3d(1)]
+            # conv_block += [nn.ReflectionPad3d(1)]  # only pad height and width dimensions
         elif padding_type == 'zero':
             p = 1
         else:
