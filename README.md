@@ -37,7 +37,7 @@ To test the 3DCycleGAN model, execute:
 python test.py --dataroot './dataset/Depth11' --name train11 --model cycle_gan --load_size 212 --epoch latest
 ```
 
-## Advanced Configuration
+### Advanced Configuration
 For customized training settings or modifications to the network architecture, refer to the detailed documentation.
 
 ## OCT2Confocal Dataset
