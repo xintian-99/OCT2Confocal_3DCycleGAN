@@ -73,6 +73,9 @@ The OCT2Confocal dataset can be applied to:
 ## Dataset Availability
 The full dataset will be released upon the publication of our paper. This release will allow researchers and practitioners full access to the dataset for their studies and applications.
 
+## Ethical Standards：
+All mice experiments were approved by the local Animal Welfare and Ethical Review Board (Bristol AWERB), and were conducted under a Home Office Project Licence.
+
 ## Early Access
 To request early access, please email xin.tian@bristol.ac.uk. The download link will be shared post-submission.
 
