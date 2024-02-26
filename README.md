@@ -2,11 +2,9 @@
 
 
 ## Overview
-Code for ***OCT2Confocal: 3D CycleGAN based Translation of Retinal OCT Images to Confocal Microscopy***
+Code for ***OCT2Confocal: 3D CycleGAN based Translation of Retinal OCT Images to Confocal Microscopy (ISBI 2024)***
 
 Xin Tian, Nantheera Anantrasirichai, Lindsay Nicholson, and Alin Achim
-
-Accepted by the *** International Symposium on Biomedical Imaging (ISBI) 2024 ***
 
 -[*[Paper]*](https://arxiv.org/abs/2311.10902)
 
