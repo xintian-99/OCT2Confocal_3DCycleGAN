@@ -10,7 +10,7 @@ Xin Tian, Nantheera Anantrasirichai, Lindsay Nicholson, and Alin Achim
 
 Accepted by the *** International Symposium on Biomedical Imaging (ISBI) 2024 ***
 
--[*[Paper]*](arXiv:2311.10902](https://arxiv.org/abs/2311.10902)
+-[*[Paper]*](https://arxiv.org/abs/2311.10902)
 
 ## Traing Dataset Structure
 The dataset is organized within the `dataset` directory, containing two subfolders: 
