@@ -30,7 +30,14 @@ pip install torch==2.0.1+cu117 torchvision==0.15.2+cu117 torchaudio==2.0.2+cu117
 To train the 3DCycleGAN model, execute:
 
 ```bash
-python train.py --dataroot './dataset/Depth11' --name test11 --model cycle_gan --n_epochs 200 --n_epochs_decay 200 --save_epoch_freq 20 --load_size 212 --crop_size 212 --lr 0.00002
+python train.py --dataroot './dataset/Depth11' --name train11 --model cycle_gan --n_epochs 200 --n_epochs_decay 200 --save_epoch_freq 20 --load_size 232 --crop_size 212 --lr 0.00002
+```
+
+## Testing Trained Model
+To test the 3DCycleGAN model, execute:
+
+```bash
+python test.py --dataroot './dataset/Depth11' --name train11 --model cycle_gan --load_size 212 --epoch latest
 ```
 
 ## Advanced Configuration
