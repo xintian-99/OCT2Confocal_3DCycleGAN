@@ -2,9 +2,7 @@
 
 
 ## Overview
-Code of 3D CycleGAN for the translation of Optical Coherence Tomography (OCT) images into Confocal microscopy images. 
- 
-*** OCT2Confocal: 3D CycleGAN based Translation of Retinal OCT Images to Confocal Microscopy ***
+Code for ***OCT2Confocal: 3D CycleGAN based Translation of Retinal OCT Images to Confocal Microscopy***
 
 Xin Tian, Nantheera Anantrasirichai, Lindsay Nicholson, and Alin Achim
 
