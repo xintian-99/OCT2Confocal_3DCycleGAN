@@ -2,15 +2,15 @@
 
 
 ## Overview
-This project provided a framework leveraging 3D CycleGAN for the translation of Optical Coherence Tomography (OCT) images into Confocal microscopy images. 
+Code of 3D CycleGAN for the translation of Optical Coherence Tomography (OCT) images into Confocal microscopy images. 
  
-Paper: OCT2Confocal: 3D CycleGAN based Translation of Retinal OCT Images to Confocal Microscopy
+*** OCT2Confocal: 3D CycleGAN based Translation of Retinal OCT Images to Confocal Microscopy ***
 
 Xin Tian, Nantheera Anantrasirichai, Lindsay Nicholson, and Alin Achim
 
-Accepted by the International Symposium on Biomedical Imaging (ISBI) 2024. 
+Accepted by the *** International Symposium on Biomedical Imaging (ISBI) 2024 ***
 
-The paper is available at [arXiv:2311.10902](https://arxiv.org/abs/2311.10902).
+-[*[Paper]*](arXiv:2311.10902](https://arxiv.org/abs/2311.10902)
 
 ## Traing Dataset Structure
 The dataset is organized within the `dataset` directory, containing two subfolders: 
