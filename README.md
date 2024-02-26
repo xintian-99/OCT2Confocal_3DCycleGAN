@@ -76,8 +76,6 @@ The full dataset will be released upon the publication of our paper. This releas
 ## Early Access
 To request early access, please email xin.tian@bristol.ac.uk. The download link will be shared post-submission.
 
-# OCT2Confocal: 3D CycleGAN based Translation of Retinal OCT Images to Confocal Microscopy
-
 ## Citation
 If you use OCT2Confocal in your research, please cite:
 
