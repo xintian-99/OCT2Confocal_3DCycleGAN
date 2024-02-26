@@ -1,0 +1,17 @@
+name: 3DCyclegan
+channels:
+- pytorch
+- defaults
+dependencies:
+- python=3.8
+- pytorch=2.0.0
+- scipy
+- pip
+- pip:
+  - dominate==2.6.0
+  - torchvision==0.14.0
+  - Pillow==8.0.1
+  - numpy==1.19.2
+  - visdom==0.1.8
+  - wandb==0.12.18
+  - tifffile
