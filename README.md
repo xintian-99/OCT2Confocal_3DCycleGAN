@@ -1,19 +1,21 @@
-# OCT2Confocal Dataset
+# OCT2Confocal 3DCycleGAN
 
-## Overview
+## Dataset
+
+### Overview
 The OCT2Confocal dataset uniquely combines in-vivo grayscale Optical Coherence Tomography (OCT) images with ex-vivo colored confocal images from C57BL/6 mice. This dataset includes three sets of retinal images: A2L, A2R, and B3R, representing individual mice and their respective eyes.
 
 ![OCT and Confocal Images](images/OCTandconfocal.png)
 
-## Image Acquisition and Processing
+### Image Acquisition and Processing
 
-### In-vivo OCT Images
+#### In-vivo OCT Images
 - **Acquisition Details**: Captured using a Micron IV fundus camera with a mouse-specific lens. 
 - **Resolution and Artifacts**: 1024×512×512 pixels. Artifacts may include motion, speckle noise, multiple scattering, attenuation, or beam-width artifacts.
 - **Volume Scans**: Centered around the optic disc, these scans target retinal layers between the Inner Limiting Membrane (ILM) and Inner Plexiform Layer (IPL).
 - **2D OCT Projections**: Created by summing in the z-direction for a comprehensive view.
 
-### Ex-vivo Confocal Images
+#### Ex-vivo Confocal Images
 - **Procedure**: Post OCT imaging, the retinas were prepared for confocal imaging using a Leica SP5-AOBS microscope.
 - **Staining and Channels**: 
   - **Red (Isolectin IB4)**: Stains endothelial cells in blood vessels.
@@ -24,7 +26,7 @@ The OCT2Confocal dataset uniquely combines in-vivo grayscale Optical Coherence T
 
 There are 22 OCT images acquired in the same manner as the primary dataset, but without corresponding confocal matches. These images are for evaluating model performance and can be further used to advance multimodal image analysis.
 
-## Dataset Applications
+### Dataset Applications
 The OCT2Confocal dataset can be applied to:
 
 - **Multimodal Image Translation**: Facilitating the development of advanced algorithms for translating between different imaging modalities, thereby providing a more comprehensive understanding of retinal conditions.
@@ -34,7 +36,7 @@ The OCT2Confocal dataset can be applied to:
 ## Dataset Availability
 The full dataset will be released upon the publication of our paper. This release will allow researchers and practitioners full access to the dataset for their studies and applications.
 
-### Early Access
+## Early Access
 To request early access, please email xin.tian@bristol.ac.uk. The download link will be shared post-submission.
 
 <!--### Registration Form
