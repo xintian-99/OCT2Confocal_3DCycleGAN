@@ -1,9 +1,34 @@
 # OCT2Confocal 3DCycleGAN
 
-## Dataset
 
-### Overview
-The OCT2Confocal dataset uniquely combines in-vivo grayscale Optical Coherence Tomography (OCT) images with ex-vivo colored confocal images from C57BL/6 mice. This dataset includes three sets of retinal images: A2L, A2R, and B3R, representing individual mice and their respective eyes.
+## Overview
+OCT2Confocal is a pioneering framework leveraging 3D CycleGAN for the translation of Optical Coherence Tomography (OCT) images into Confocal microscopy images. This project is based on the research presented in the paper "OCT2Confocal: 3D CycleGAN based Translation of Retinal OCT Images to Confocal Microscopy" by Xin Tian, Nantheera Anantrasirichai, Lindsay Nicholson, and Alin Achim, accepted by the International Symposium on Biomedical Imaging (ISBI) 2024. The paper is available at [arXiv:2311.10902](https://arxiv.org/abs/2311.10902).
+
+## Traing Dataset Structure
+The dataset is organized within the `dataset` directory, containing two subfolders: 
+- `trainA`: OCT images
+- `trainB`: Confocal images
+
+Ensure the images are pre-processed as per the specifications outlined in the paper for optimal results.
+
+## Installation
+Install the necessary dependencies with the following command:
+
+```bash
+pip install torch==2.0.1+cu117 torchvision==0.15.2+cu117 torchaudio==2.0.2+cu117 -f https://download.pytorch.org/whl/torch_stable.html
+```
+
+## Training the Model
+To train the 3DCycleGAN model, execute:
+
+```bash
+python train.py --dataroot './dataset/Depth11' --name test11 --model cycle_gan --n_epochs 200 --n_epochs_decay 200 --save_epoch_freq 20 --load_size 212 --crop_size 212 --lr 0.00002
+```
+
+## Advanced Configuration
+For customized training settings or modifications to the network architecture, refer to the detailed documentation.
+
+## OCT2Confocal Dataset
 
 ![OCT and Confocal Images](images/OCTandconfocal.png)
 
@@ -38,6 +63,22 @@ The full dataset will be released upon the publication of our paper. This releas
 
 ## Early Access
 To request early access, please email xin.tian@bristol.ac.uk. The download link will be shared post-submission.
+
+# OCT2Confocal: 3D CycleGAN based Translation of Retinal OCT Images to Confocal Microscopy
+
+## Citation
+If you use OCT2Confocal in your research, please cite:
+
+```bibtex
+@inproceedings{tian2024oct2confocal,
+  title={OCT2Confocal: 3D CycleGAN based Translation of Retinal OCT Images to Confocal Microscopy},
+  author={Tian, Xin and Anantrasirichai, Nantheera and Nicholson, Lindsay and Achim, Alin},
+  booktitle={IEEE International Symposium on Biomedical Imaging (ISBI)},
+  year={2024},
+  url={https://arxiv.org/abs/2311.10902}
+}
+```
+
 
 <!--### Registration Form
 To request early access, please fill in this [registration form](#). The download link will be shared post submission.-->
