@@ -155,7 +155,7 @@ class CycleGANModel(BaseModel):
         lambda_idt = self.opt.lambda_identity
         lambda_A = self.opt.lambda_A
         lambda_B = self.opt.lambda_B
-	lambda_GL = self.opt.lambda_GL
+        lambda_GL = self.opt.lambda_GL
         # Identity loss
         if lambda_idt > 0:
             # G_A should be identity if real_B is fed: ||G_A(B) - B||
@@ -190,10 +190,10 @@ class CycleGANModel(BaseModel):
         self.loss_G = self.loss_G_A + self.loss_G_B + self.loss_cycle_A + self.loss_cycle_B + self.loss_idt_A + self.loss_idt_B
 
 	# Gradient Loss for G_A: || gradients(G_A(B)) - gradients(A) ||
-        self.loss_GL_A = networks.cal_gradient_loss(self.real_A, self.fake_A, self.device) * lambda_GL
+        # self.loss_GL_A = networks.cal_gradient_loss(self.real_A, self.fake_A, self.device) * lambda_GL
         # Gradient Loss for G_B: || gradients(G_B(A)) - gradients(B) ||
-        self.loss_GL_B = networks.cal_gradient_loss(self.real_B, self.fake_B, self.device) * lambda_GL
-        self.loss_G = self.loss_G_A + self.loss_G_B + self.loss_cycle_A + self.loss_cycle_B + self.loss_idt_A + self.loss_idt_B + self.loss_GL_A + self.loss_GL_B
+        # self.loss_GL_B = networks.cal_gradient_loss(self.real_B, self.fake_B, self.device) * lambda_GL
+        # self.loss_G = self.loss_G_A + self.loss_G_B + self.loss_cycle_A + self.loss_cycle_B + self.loss_idt_A + self.loss_idt_B + self.loss_GL_A + self.loss_GL_B
 
 
         self.loss_G.backward()

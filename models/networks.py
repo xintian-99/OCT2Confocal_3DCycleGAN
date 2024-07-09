@@ -401,12 +401,14 @@ class ResnetGenerator(nn.Module):
         else:
             use_bias = norm_layer == nn.InstanceNorm3d
 
-        model = [nn.ReflectionPad3d(3),
-                 nn.Conv3d(input_nc, ngf, kernel_size=(7,7,7), padding=0, bias=use_bias),
+        model = [nn.ReflectionPad3d((3,3,3,3,4,4)),
+                 nn.Conv3d(input_nc, ngf, kernel_size=(9,7,7), padding=0, bias=use_bias),
+        # model = [nn.ReflectionPad3d(3),
+        #          nn.Conv3d(input_nc, ngf, kernel_size=(7,7,7), padding=0, bias=use_bias),
                 norm_layer(ngf),
                 nn.ReLU(True)]
 
-        n_downsampling = 2
+        n_downsampling = 3
         for i in range(n_downsampling):  # add downsampling layers
             mult = 2 ** i
             model += [nn.Conv3d(ngf * mult, ngf * mult * 2, kernel_size=(3,3,3), stride=(2,2,2), padding=1, bias=use_bias),
@@ -426,9 +428,11 @@ class ResnetGenerator(nn.Module):
                                          bias=use_bias),
                       norm_layer(int(ngf * mult / 2)),
                       nn.ReLU(True)]
-            model += [nn.ReflectionPad3d(3)]
-        # model += [nn.Conv3d(int(ngf * mult / 2), output_nc, kernel_size=(7,7,7), padding=0)]
-	model += [nn.Conv3d(ngf, output_nc, kernel_size=(7,7,7), padding=0)]
+            model += [nn.ReflectionPad3d((1,1,1,1,1,1))]
+        model += [nn.Conv3d(int(ngf * mult / 2), output_nc, kernel_size=(8,7,7), padding=0)]
+        #     model += [nn.ReflectionPad3d(3)]
+        # # model += [nn.Conv3d(int(ngf * mult / 2), output_nc, kernel_size=(7,7,7), padding=0)]
+	    # model += [nn.Conv3d(ngf, output_nc, kernel_size=(7,7,7), padding=0)]
         model += [nn.Tanh()]
 
 
@@ -473,26 +477,31 @@ class ResnetBlock(nn.Module):
         conv_block = []
         p = 0
         if padding_type == 'reflect':
-            conv_block += [nn.ReflectionPad3d(1)]
+            conv_block += [nn.ReflectionPad3d((3,3,3,3,1,1))]
+            # conv_block += [nn.ReflectionPad3d(1)]
             # conv_block += [nn.ReflectionPad3d((0,0,1,1,1,1))]  # only pad height and width dimensions
         elif padding_type == 'replicate':
-            conv_block += [nn.ReplicationPad3d(1)]
+            # conv_block += [nn.ReplicationPad3d(1)]
+            conv_block += [nn.ReflectionPad3d((3,3,3,3,1,1))]
             # conv_block += [nn.ReflectionPad3d((0,0,1,1,1,1))]  # only pad height and width dimensions
         elif padding_type == 'zero':
             p = 1
         else:
             raise NotImplementedError('padding [%s] is not implemented' % padding_type)
 
-        conv_block += [nn.Conv3d(dim, dim, kernel_size=(3,3,3), padding=p, bias=use_bias), norm_layer(dim), nn.ReLU(True)]
+        conv_block += [nn.Conv3d(dim, dim, kernel_size=(2,5,5), padding=p, bias=use_bias), norm_layer(dim), nn.ReLU(True)]
+        # conv_block += [nn.Conv3d(dim, dim, kernel_size=(3,3,3), padding=p, bias=use_bias), norm_layer(dim), nn.ReLU(True)]
         if use_dropout:
             conv_block += [nn.Dropout(0.5)]
 
         p = 0
         if padding_type == 'reflect':
-            conv_block += [nn.ReflectionPad3d(1)]
+            # conv_block += [nn.ReflectionPad3d(1)]
+            conv_block += [nn.ReflectionPad3d((0,0,0,0,1,0))]
             # conv_block += [nn.ReflectionPad3d(1)]  # only pad height and width dimensions
         elif padding_type == 'replicate':
-            conv_block += [nn.ReplicationPad3d(1)]
+            # conv_block += [nn.ReplicationPad3d(1)]
+            conv_block += [nn.ReplicationPad3d((0,0,0,0,1,0))]
             # conv_block += [nn.ReflectionPad3d(1)]  # only pad height and width dimensions
         elif padding_type == 'zero':
             p = 1
